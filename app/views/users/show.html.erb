@@ -1,0 +1,16 @@
+<%= @user.name %>
+<a href="/users/<%= @user.id %>/edit">Edit your profile</a>
+<form action="/secrets" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+	New Secret<textarea rows="6" cols="20"></textarea>
+	<input type="submit" name="submit" value="Create Secret">
+</form>
+<% if @secrets %>
+	<% @secrets.each do |secret| %>
+		<%= secret %>
+		<form action="/secrets/:id" method="post">
+			<input type="hidden" name="_method" value="delete">
+			<input type="submit" name="submit" value="Delete This Secret">
+		</form>
+	<% end %>
+<% end %>
